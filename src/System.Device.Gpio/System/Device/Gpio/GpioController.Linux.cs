@@ -12,6 +12,7 @@ namespace System.Device.Gpio
     {
         private const string CpuInfoPath = "/proc/cpuinfo";
         private const string RaspberryPiHardware = "BCM2835";
+        private const string RaspberryPi4Hardware = "BCM2711";
         private const string HummingBoardHardware = @"Freescale i.MX6 Quad/DualLite (Device Tree)";
 
         /// <summary>
@@ -40,6 +41,11 @@ namespace System.Device.Gpio
                     if (match.Groups.Count > 1)
                     {
                         if (match.Groups[1].Value == RaspberryPiHardware)
+                        {
+                            return new RaspberryPi3Driver();
+                        }
+                        // added as a sperate if since there maybe changes required in Pi4
+                        if (match.Groups[1].Value == RaspberryPi4Hardware)
                         {
                             return new RaspberryPi3Driver();
                         }
